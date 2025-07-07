@@ -16,7 +16,7 @@ export const getHeader = (
   return {
     'Trace-Id': `${getMoment()}-${user}-${application}`,
     'Authorization': `Bearer ${token}`,
-    'x-api-key': EtherdocSdkConfig.xApiKey,
+    // 'x-api-key': EtherdocSdkConfig.xApiKey,
     'k1': k1,
   };
 };
