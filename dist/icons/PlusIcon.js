@@ -1,0 +1,18 @@
+import React from 'react';
+export const PlusIcon = (props) => (React.createElement("svg", { width: "24", height: "24", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", fill: "#ffffff", stroke: "#ffffff" },
+    React.createElement("g", { id: "SVGRepo_bgCarrier", "stroke-width": "0" }),
+    React.createElement("g", { id: "SVGRepo_tracerCarrier", "stroke-linecap": "round", "stroke-linejoin": "round" }),
+    React.createElement("g", { id: "SVGRepo_iconCarrier" },
+        React.createElement("g", { id: "Complete" },
+            " ",
+            React.createElement("g", { "data-name": "add", id: "add-2" },
+                " ",
+                React.createElement("g", null,
+                    " ",
+                    React.createElement("line", { fill: "none", stroke: "#ffffff", "stroke-linecap": "round", "stroke-linejoin": "round", "stroke-width": "2", x1: "12", x2: "12", y1: "19", y2: "5" }),
+                    " ",
+                    React.createElement("line", { fill: "none", stroke: "#ffffff", "stroke-linecap": "round", "stroke-linejoin": "round", "stroke-width": "2", x1: "5", x2: "19", y1: "12", y2: "12" }),
+                    " "),
+                " "),
+            " "),
+        " ")));
