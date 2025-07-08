@@ -4,17 +4,21 @@ export const getMoment = (): string => {
   try {
     const now = new Date();
     const isoString = now.toISOString();
-    // Validación adicional
-    if (typeof isoString !== 'string') {
+    
+    // Validación adicional más robusta
+    if (typeof isoString !== 'string' || !isoString) {
       throw new Error('Invalid ISO string format');
     }
-    const iso = isoString.replace(/[-:T.Z]/g, '');
+    
+    // Asegurar que tenemos una string válida antes de usar replace
+    const iso = String(isoString).replace(/[-:T.Z]/g, '');
     const milliseconds = now.getMilliseconds().toString().padStart(3, '0');
+    
     return iso.slice(0, 17) + milliseconds;
   } catch (error) {
     console.error('Error in getMoment:', error);
-    // Valor de fallback
-    return `${Date.now()}`;
+    // Valor de fallback más robusto
+    return String(Date.now());
   }
 };
 
@@ -24,11 +28,17 @@ export const getHeader = (
   application: string,
   k1: string
 ): Record<string, string> => {
+  // Validar que todos los parámetros sean strings
+  const safeToken = String(token || '');
+  const safeUser = String(user || '');
+  const safeApplication = String(application || '');
+  const safeK1 = String(k1 || '');
+
   return {
-    'Trace-Id': `${getMoment()}-${user}-${application}`,
-    'Authorization': `Bearer ${token}`,
+    'Trace-Id': `${getMoment()}-${safeUser}-${safeApplication}`,
+    'Authorization': `Bearer ${safeToken}`,
     // 'x-api-key': EtherdocSdkConfig.xApiKey,
-    'k1': k1,
+    'k1': safeK1,
   };
 };
 
@@ -40,9 +50,12 @@ export const buildHeaders = (
 ): Headers => {
   const headersObj = getHeader(token, user, application, k1);
   const headers = new Headers();
+  
   Object.entries(headersObj).forEach(([key, value]) => {
-    headers.append(key, value);
+    // Asegurar que tanto key como value sean strings
+    headers.append(String(key), String(value));
   });
+  
   return headers;
 };
 
@@ -50,5 +63,9 @@ export const buildUrl = (path: string, isDownload = false): string => {
   const base = isDownload
     ? EtherdocSdkConfig.apiDownload
     : EtherdocSdkConfig.apiManagement;
-  return `${base}${path}`;
+    
+  // Validar que path sea una string
+  const safePath = String(path || '');
+  
+  return `${base}${safePath}`;
 };
