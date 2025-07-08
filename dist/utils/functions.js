@@ -1,9 +1,21 @@
 import { EtherdocSdkConfig } from '../config/config';
 export const getMoment = () => {
-    const now = new Date();
-    const iso = now.toISOString().replace(/[-:T.Z]/g, '');
-    const milliseconds = now.getMilliseconds().toString().padStart(3, '0');
-    return iso.slice(0, 17) + milliseconds;
+    try {
+        const now = new Date();
+        const isoString = now.toISOString();
+        // Validación adicional
+        if (typeof isoString !== 'string') {
+            throw new Error('Invalid ISO string format');
+        }
+        const iso = isoString.replace(/[-:T.Z]/g, '');
+        const milliseconds = now.getMilliseconds().toString().padStart(3, '0');
+        return iso.slice(0, 17) + milliseconds;
+    }
+    catch (error) {
+        console.error('Error in getMoment:', error);
+        // Valor de fallback
+        return `${Date.now()}`;
+    }
 };
 export const getHeader = (token, user, application, k1) => {
     return {
