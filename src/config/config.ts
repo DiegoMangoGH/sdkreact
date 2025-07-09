@@ -7,5 +7,5 @@ export const EtherdocSdkConfig = {
   apiDownload: "http://172.16.6.30:8082/api/download/v1",
   apiUpload: "http://172.16.6.30:3070/api/upload/v1",
 
-  // xApiKey: "6LWu9gkb5GsSGSuwbIzeslpawuxLtCBM4WUZ0njOe2izG086",
+  xApiKey: "6LWu9gkb5GsSGSuwbIzeslpawuxLtCBM4WUZ0njOe2izG086",
 };
